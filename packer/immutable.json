@@ -17,24 +17,14 @@
     ],
     "provisioners": [
         {
-            "type": "shell",
-            "pause_before": "5m",
-            "script": "scripts/install_ruby.sh",
-            "execute_command": "sudo {{.Path}}"
-        },
-        {
-            "type": "shell",
-            "script": "scripts/install_mongodb.sh",
-            "execute_command": "sudo {{.Path}}"
-        },
-        {
             "type": "file",
+            "pause_before": "5m",
             "source": "./files/reddit.service",
             "destination": "/tmp/reddit.service"
         },
         {
             "type": "shell",
-            "script": "files/install_deploy.sh",
+            "script": "files/deploy.sh",
             "execute_command": "sudo {{.Path}}"
         }
     ]
