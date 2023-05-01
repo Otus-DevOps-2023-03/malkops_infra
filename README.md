@@ -28,6 +28,7 @@ someinternalhost_IP = 10.128.0.27
 ### cloud-testapp
 
 testapp_IP = 84.201.134.19
+
 testapp_port = 9292
 
 yc compute instance create \
@@ -38,3 +39,14 @@ yc compute instance create \
   --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 \
   --metadata serial-port-enable=1 \
   --metadata-from-file user-data=cloud-config.yml
+
+### packer-base
+
+What I achieve:
+ - Install packer
+ - Create [base image](packer/ubuntu16.json) with mongo and ruby on rails
+ - Create [full image](packer/immutable.json) based on base image with app
+ - Parametrize images with [variables](variables.json.examples)
+ - Write [script](create-reddit-vm.sh) for creating VM
+ - Write [additional files](packer/files/) that necessary for creating full image
+ - Refactor structure of the project (testapp scripts move to config-scripts directory)

@@ -1,0 +1,9 @@
+[Unit]
+Description=Reddit app
+
+[Service]
+WorkingDirectory=/opt/reddit
+ExecStart=/usr/local/bin/puma -C /opt/reddit/config/deploy/production.rb
+
+[Install]
+WantedBy=multi-user.target
