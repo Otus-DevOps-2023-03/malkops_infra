@@ -1,0 +1,39 @@
+#cloud-config
+users:
+  - name: malkops
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDI0kbDKKMHJvEQHQiDpsVUWfLq9OGC4aPigN423B/BBcg9A4W+f7zalcYnA+HTzRGtvvi3re6815Ls2dn1PX8zhWhrjs6GSymke1u24mFFGUptmO4UexdCOAmqLOaZnTs4QCCXo0Ga+vZRsphf+s6odo19naa0jf2j5bGOcpznMCYWQEZzZIlF6eNcLD0gagagDvBHrhV8cnWPV6jzp4N4cChAO0zuo/vs0dlmjg9DamPiTUGUPf7KZk22egOAnuWazntAfRxinCMMtvwmsPFWzC/ze2Gyx5uEK38068X2juN6DXSuc8TD8997re8QGkB7O0glRn+toS503k00gjXnR7QmdjsmuLdF6LBMBnBqLg0DYXLCVmx7dXsNadVAh1/Lke0Rzj6wrAs+WNbacloBx/jcZykGEeKN0Z1jqV5DXRhyYgctpKX4hgmEKT7HSQbVbNcb08OeOxh7Sznp8yxSTaZzTnybsx8nwSLA7B22lmWXNE1IkPpRCiMj7NFQhFc= otus
+write_files:
+  - path: /home/malkops/scripts/install_ruby.sh
+    permissions: 0501
+    content: |
+      #!/bin/bash
+      sudo apt update
+      sudo apt install -y ruby-full ruby-bundler build-essential
+  - path: /home/malkops/scripts/install_mongodb.sh
+    permissions: 0501
+    content: |
+      #!/bin/bash
+      wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+      echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+      sudo apt-get update
+      sudo apt-get install -y mongodb-org
+      sudo systemctl enable --now mongod
+  - path: /home/malkops/scripts/deploy.sh
+    permissions: 0501
+    content: |
+      #!/bin/bash
+      sudo apt install -y git
+      git clone -b monolith https://github.com/express42/reddit.git
+      cd reddit && bundle install
+      puma -d
+  - path: /home/malkops/scripts/startup.sh
+    permissions: 0501
+    content: |
+      #!/bin/bash
+      /home/malkops/scripts/install_ruby.sh && /home/malkops/scripts/install_mongodb.sh && /home/malkops/scripts/deploy.sh
+runcmd:
+  - /home/malkops/scripts/startup.sh
