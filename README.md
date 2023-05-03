@@ -31,6 +31,7 @@ testapp_IP = 84.201.134.19
 
 testapp_port = 9292
 
+```bash
 yc compute instance create \
   --name reddit-app \
   --hostname reddit-app \
@@ -39,6 +40,7 @@ yc compute instance create \
   --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 \
   --metadata serial-port-enable=1 \
   --metadata-from-file user-data=cloud-config.yml
+```
 
 ### packer-base
 
@@ -50,3 +52,13 @@ What I achieve:
  - Write [script](create-reddit-vm.sh) for creating VM
  - Write [additional files](packer/files/) that necessary for creating full image
  - Refactor structure of the project (testapp scripts move to config-scripts directory)
+
+### terraform-1
+
+I see there a little problem, that if we want to add just one more instance, we have to copy whole banch of code.
+
+So in this practice I added HTTP-loadbalancer and two instance as a terraform code.
+
+Two instance implemented by `count` attribute, which you can pass with variable `replicas`.
+
+In fact using of loadbalancing I don't needed public IP for my VMs.
