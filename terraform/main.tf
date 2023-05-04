@@ -42,7 +42,7 @@ resource "yandex_compute_instance" "app" {
   network_interface {
     # default-ru-central1-a
     subnet_id = var.subnet_id
-    nat       = false
+    nat       = true
   }
 
   connection {

@@ -55,10 +55,12 @@ What I achieve:
 
 ### terraform-1
 
-I see there a little problem, that if we want to add just one more instance, we have to copy whole banch of code.
+I see there a little problem, that if we want to add just one more instance, we have to copy a whole bunch of code.
 
-So in this practice I added HTTP-loadbalancer and two instance as a terraform code.
+So, in this practice, I implement HTTP-loadbalancer and two instances as a terraform code.
 
-Two instance implemented by `count` attribute, which you can pass with variable `replicas`.
+In addition, you can switch between HTTP-loadbalancer and network loadbalancer by renaming `alb.tb_1` and `lb.tf` files. You also have to comment/uncomment particular output in `output.tf`.
 
-In fact using of loadbalancing I don't needed public IP for my VMs.
+Two instances are implemented by the `count` attribute, which you can pass with variable `replicas`.
+
+In fact, by using loadbalancing, I still need public IP for provisioners (and I don't like it).
