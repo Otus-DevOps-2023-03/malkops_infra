@@ -6,7 +6,7 @@
             "folder_id": "{{user `folder_id`}}",
             "source_image_family": "{{user `source_image_family`}}",
             "source_image_id": "{{user `source_image_id`}}",
-            "image_name": "reddit-base-{{timestamp}}",
+            "image_name": "reddit-app-{{timestamp}}",
             "image_family": "reddit-base",
             "ssh_username": "ubuntu",
             "platform_id": "standard-v1",
@@ -20,11 +20,6 @@
             "type": "shell",
             "pause_before": "3m",
             "script": "scripts/install_ruby.sh",
-            "execute_command": "sudo {{.Path}}"
-        },
-        {
-            "type": "shell",
-            "script": "scripts/install_mongodb.sh",
             "execute_command": "sudo {{.Path}}"
         }
     ]

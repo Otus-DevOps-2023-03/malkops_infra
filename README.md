@@ -64,3 +64,12 @@ In addition, you can switch between HTTP-loadbalancer and network loadbalancer b
 Two instances are implemented by the `count` attribute, which you can pass with variable `replicas`.
 
 In fact, by using loadbalancing, I still need public IP for provisioners (and I don't like it).
+
+### terraform-2
+
+Release note:
+  - Split `main.tf` on two modules: `app` and `db`
+  - Decreese timeout before execution scripts from 5m to 3m
+  - Add two packer image: `app.json` with preinstalled ruby and `db.json` with preinstalled mongodb
+  - Add variables
+  - Add two environments: `prod` and `stage`
