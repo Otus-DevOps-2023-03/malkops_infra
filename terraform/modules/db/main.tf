@@ -8,16 +8,13 @@
 #   required_version = ">= 0.13"
 # }
 
-provider "yandex" {
-  service_account_key_file = var.service_account_key_file
-  cloud_id                 = var.cloud_id
-  folder_id                = var.folder_id
-  zone                     = var.zone
-}
+resource "yandex_compute_instance" "db" {
+  name = "reddit-db"
+  labels = {
+    tags = "reddit-db"
+    environment = var.environment
+  }
 
-resource "yandex_compute_instance" "app" {
-  count = var.replicas
-  name = "reddit-app-${count.index}"
   metadata = {
     ssh-keys = "ubuntu:${file(var.public_key_path)}"
   }
@@ -34,15 +31,13 @@ resource "yandex_compute_instance" "app" {
 
   boot_disk {
     initialize_params {
-      # reddit-base
-      image_id = var.image_id
+      image_id = var.db_disk_image
     }
   }
 
   network_interface {
-    # default-ru-central1-a
     subnet_id = var.subnet_id
-    nat       = true
+    nat = true
   }
 
   connection {
@@ -50,17 +45,16 @@ resource "yandex_compute_instance" "app" {
     host  = self.network_interface.0.nat_ip_address
     user  = "ubuntu"
     agent = false
-    # путь до приватного ключа
     private_key = file(var.connection_private_key)
   }
 
   provisioner "file" {
-    source      = "files/puma.service"
-    destination = "/tmp/puma.service"
+    source      = "${path.module}/files/mongod.conf"
+    destination = "/tmp/mongod.conf"
   }
 
   provisioner "remote-exec" {
-    script = "files/deploy.sh"
+    script = "${path.module}/files/deploy.sh"
   }
 
 }
