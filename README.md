@@ -73,3 +73,7 @@ Release note:
   - Add two packer image: `app.json` with preinstalled ruby and `db.json` with preinstalled mongodb
   - Add variables
   - Add two environments: `prod` and `stage`
+  - \* Add Object Storage backend for `prod` and `stage` environments
+  - \* Add provisioning for deploy application
+
+Backend init: `terraform init -backend-config="access_key=YOUR_KEY" -backend-config="secret_key=YOUR_SECRET_KEY"`

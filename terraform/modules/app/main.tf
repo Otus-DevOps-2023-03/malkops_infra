@@ -1,12 +1,12 @@
 # commenting for pass a tests
-# terraform {
-#   required_providers {
-#     yandex = {
-#       source = "yandex-cloud/yandex"
-#     }
-#   }
-#   required_version = ">= 0.13"
-# }
+terraform {
+  required_providers {
+    yandex = {
+      source = "yandex-cloud/yandex"
+    }
+  }
+  required_version = ">= 0.13"
+}
 
 resource "yandex_compute_instance" "app" {
   count = var.replicas
@@ -43,21 +43,21 @@ resource "yandex_compute_instance" "app" {
     nat       = true
   }
 
-#   connection {
-#     type  = "ssh"
-#     host  = self.network_interface.0.nat_ip_address
-#     user  = "ubuntu"
-#     agent = false
-#     private_key = file(var.connection_private_key)
-#   }
+  connection {
+    type  = "ssh"
+    host  = self.network_interface.0.nat_ip_address
+    user  = "ubuntu"
+    agent = false
+    private_key = file(var.connection_private_key)
+  }
 
-#   provisioner "file" {
-#     source      = "files/puma.service"
-#     destination = "/tmp/puma.service"
-#   }
+  provisioner "file" {
+    content     = templatefile("${path.module}/files/puma.service", { db_address = var.db_address })
+    destination = "/tmp/puma.service"
+  }
 
-#   provisioner "remote-exec" {
-#     script = "files/deploy.sh"
-#   }
+  provisioner "remote-exec" {
+    script = "${path.module}/files/deploy.sh"
+  }
 
 }

@@ -2,6 +2,10 @@ variable "public_key_path" {
   description = "Path to the public key used for ssh access"
 }
 
+variable "connection_private_key" {
+  description = "Path to the private key used for provisioning"
+}
+
 variable db_disk_image {
   description = "Disk image for reddit db"
   default = "reddit-db-base"
@@ -9,11 +13,6 @@ variable db_disk_image {
 
 variable subnet_id {
   description = "Subnets for modules"
-}
-
-variable "instance_tags" {
-  description = "App environment"
-  default = "db"
 }
 
 variable "environment" {
