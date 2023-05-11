@@ -77,3 +77,10 @@ Release note:
   - \* Add provisioning for deploy application
 
 Backend init: `terraform init -backend-config="access_key=YOUR_KEY" -backend-config="secret_key=YOUR_SECRET_KEY"`
+
+### Ansible
+
+Release note:
+  - Added simple ansible configuration
+  - Added simple ansible palybook
+  - Added variables for turning off terraform provisioning

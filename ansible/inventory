@@ -1,0 +1,4 @@
+[app]
+appserver ansible_host=
+[db]
+dbserver ansible_host=
