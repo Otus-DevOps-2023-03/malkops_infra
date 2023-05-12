@@ -27,3 +27,8 @@ variable "replicas" {
 variable "db_address" {
   description = "Database ip address"
 }
+
+variable "provision" {
+  description = "Is necessary provisioning"
+  default = "false"
+}

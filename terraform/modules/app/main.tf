@@ -43,9 +43,13 @@ resource "yandex_compute_instance" "app" {
     nat       = true
   }
 
+}
+
+resource "null_resource" "app" {
+  count = var.provision == true ? 1 : 0
   connection {
     type  = "ssh"
-    host  = self.network_interface.0.nat_ip_address
+    host  = yandex_compute_instance.app.*.network_interface.0.nat_ip_address
     user  = "ubuntu"
     agent = false
     private_key = file(var.connection_private_key)
@@ -59,5 +63,4 @@ resource "yandex_compute_instance" "app" {
   provisioner "remote-exec" {
     script = "${path.module}/files/deploy.sh"
   }
-
 }

@@ -19,3 +19,8 @@ variable "environment" {
   description = "App environment"
   default = "test"
 }
+
+variable "provision" {
+  description = "Is necessary provisioning"
+  default = "false"
+}
