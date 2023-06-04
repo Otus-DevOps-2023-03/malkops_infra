@@ -1,0 +1,19 @@
+---
+- name: Configure MongoDB
+  hosts: db
+  become: true
+  vars:
+    mongo_bind_ip: 0.0.0.0
+  tasks:
+    - name: Change mongo config file
+      ansible.builtin.template:
+        src: templates/mongod.conf.j2
+        dest: /etc/mongod.conf
+        mode: "0644"
+      notify: Restart mongod
+
+  handlers:
+    - name: Restart mongod
+      ansible.builtin.service:
+        name: mongod
+        state: restarted

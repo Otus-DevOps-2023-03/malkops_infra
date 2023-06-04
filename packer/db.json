@@ -17,10 +17,12 @@
     ],
     "provisioners": [
         {
-            "type": "shell",
+            "type": "ansible",
             "pause_before": "90s",
-            "script": "scripts/install_mongodb.sh",
-            "execute_command": "sudo {{.Path}}"
+            "playbook_file": "ansible/packer_db.yml",
+            "ansible_ssh_extra_args": [
+                "-o IdentitiesOnly=yes -o PubkeyAcceptedAlgorithms=+ssh-rsa -o HostkeyAlgorithms=+ssh-rsa"
+            ]
         }
     ]
 }
