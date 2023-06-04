@@ -6,7 +6,7 @@
     db_host: 10.128.0.18
   tasks:
     - name: Add unit file for Puma
-      ansible.builtin.copy:
+      copy:
         src: files/puma.service
         dest: /etc/systemd/system/puma.service
         mode: "0644"
@@ -14,18 +14,18 @@
       notify: Reload puma
     - name: Add config for DB connection
       become: false
-      ansible.builtin.template:
+      template:
         src: templates/db_config.j2
         dest: /home/ubuntu/db_config
         mode: "0644"
     - name: Enable puma
-      ansible.builtin.systemd:
+      systemd:
         name: puma
         enabled: true
         daemon_reload: true
 
   handlers:
     - name: Reload puma
-      ansible.builtin.systemd:
+      systemd:
         name: puma
         state: restarted

@@ -1,11 +1,11 @@
 ---
 - name: Install Ruby and Bundler
-  hosts: all
+  hosts: app
   become: true
   remote_user: ubuntu
   tasks:
     - name: Install packages
-      ansible.builtin.apt:
+      apt:
         update_cache: true
         name:
           - ruby-full

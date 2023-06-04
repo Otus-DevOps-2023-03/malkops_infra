@@ -78,9 +78,17 @@ Release note:
 
 Backend init: `terraform init -backend-config="access_key=YOUR_KEY" -backend-config="secret_key=YOUR_SECRET_KEY"`
 
-### Ansible
+### ansible-1
 
 Release note:
-  - Added simple ansible configuration
-  - Added simple ansible palybook
-  - Added variables for turning off terraform provisioning
+  - Add simple ansible configuration
+  - Add simple ansible palybook
+  - Add variables for turning off terraform provisioning
+
+### ansible-2
+
+Release note:
+  - Add playbook with one play to deploy app and database
+  - Add playbook with multiple plays to deploy app and database
+  - Add playbook that import 3 another playbooks to deploy app and database
+  - Change packer provision from sh to ansible
