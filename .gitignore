@@ -7,3 +7,5 @@ packer/variables.json
 ### Ansible ###
 *.retry
 .vscode
+jdauphant.nginx
+vault.key
