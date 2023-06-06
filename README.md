@@ -92,3 +92,13 @@ Release note:
   - Add playbook with multiple plays to deploy app and database
   - Add playbook that import 3 another playbooks to deploy app and database
   - Change packer provision from sh to ansible
+
+### ansible-3
+
+Release note:
+  - Move old files into `old` directory
+  - Add app and db roles
+  - Add environment control with `environments` direcotry
+  - Add playbook for user creation
+  - Add `jdauphant.nginx` role for access app on 80 port
+  - Encrypt credentials with `ansible-vault`
