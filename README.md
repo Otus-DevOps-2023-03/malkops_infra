@@ -102,3 +102,11 @@ Release note:
   - Add playbook for user creation
   - Add `jdauphant.nginx` role for access app on 80 port
   - Encrypt credentials with `ansible-vault`
+
+### ansible-4
+
+Release note:
+  - Install Vagrant and VirtualBox
+  - Test ansible locally
+  - Improve db and app roles
+  - Test ansible with molecule

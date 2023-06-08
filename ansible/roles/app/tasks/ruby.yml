@@ -1,0 +1,11 @@
+---
+- name: Install packages
+  tags: ruby
+  apt:
+    update_cache: true
+    name:
+      - ruby-full
+      - ruby-bundler
+      - build-essential
+      - git
+    state: present

@@ -9,3 +9,10 @@ packer/variables.json
 .vscode
 jdauphant.nginx
 vault.key
+.vagrant/
+*.box
+*.log
+*.pyc
+*.molecule
+*.cache
+*.pytest_cache
