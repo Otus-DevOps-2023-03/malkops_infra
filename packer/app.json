@@ -19,7 +19,7 @@
         {
             "type": "ansible",
             "pause_before": "90s",
-            "playbook_file": "ansible/packer_app.yml"
+            "playbook_file": "ansible/playbooks/packer_app.yml"
         }
     ]
 }
