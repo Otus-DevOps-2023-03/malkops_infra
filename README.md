@@ -102,3 +102,9 @@ Release note:
   - Add playbook for user creation
   - Add `jdauphant.nginx` role for access app on 80 port
   - Encrypt credentials with `ansible-vault`
+
+### gitlab ci
+
+Release note:
+  - Add docker compose for gitlab in `gitlab-ci/docker-compose.yml`
+  - Play with CI pipelines
