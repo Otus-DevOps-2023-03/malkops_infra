@@ -110,3 +110,9 @@ Release note:
   - Test ansible locally
   - Improve db and app roles
   - Test ansible with molecule
+
+### gitlab ci
+
+Release note:
+  - Add docker compose for gitlab in `gitlab-ci/docker-compose.yml`
+  - Play with CI pipelines
